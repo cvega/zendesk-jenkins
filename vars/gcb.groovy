@@ -1,5 +1,4 @@
 def call(Map config = [:]) {
-  echo "Hello GCB Library"
   try {
     googleCloudBuild \
       credentialsId: "${config.credentialsId}",
