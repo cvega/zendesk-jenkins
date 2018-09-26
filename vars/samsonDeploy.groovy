@@ -5,7 +5,7 @@ def call(Map config = [:]) {
     req.setRequestMethod("POST")
     req.setDoOutput(true)
     req.setRequestProperty("Content-Type", "application/json")
-    req.setRequestProperty("Authorization:", "Basic ${config.token}")
+    req.setRequestProperty("Authorization", "Basic ${config.token}")
     req.getOutputStream().write(message.getBytes("UTF-8"));
     def postRC = req.getResponseCode();
     println(postRC);
