@@ -5,8 +5,7 @@ def call(Map config = [:]) {
       credentialsId: "${config.credentialsId}",
       source: repo(projectId: "${config.credentialsId}",
                     repoName: "hello-cje",
-                         tag: "${config.tag}", 
-                   commit: "${env.GIT_COMMIT}"),
+                      commit: "${env.GIT_COMMIT}"),
       request: file("${config.cloudBuildFile}")
   }
   catch (err) {
