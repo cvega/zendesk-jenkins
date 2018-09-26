@@ -2,7 +2,7 @@ def call(Map config = [:]) {
   echo "Hello GCB Library"
   try {
     googleCloudBuild \
-      credentialsId: "perbranch",
+      credentialsId: "${config.credentialId}",
       source: repo(projectId: "${config.projectId}",
                     repoName: "${config.repoName}",
                          tag: "${config.tag}", 
