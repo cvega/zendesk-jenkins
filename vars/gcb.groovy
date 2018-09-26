@@ -8,7 +8,6 @@ def call(Map config = [:]) {
       request: file("${config.cloudBuildFile}")
   }
   catch (err) {
-    echo "GoogleCloudBuilder failed: ${err}"
-    throw
+    throw ${err}
   }
 }
