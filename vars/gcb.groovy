@@ -3,7 +3,7 @@ def call(Map config = [:]) {
     googleCloudBuild \
       credentialsId: ${config.credential},
       source: local(${config.source}),
-      request: file('cloudbuild.yaml'),
+      request: file('cloudbuild.yaml')
   }
   catch(err) {
     echo "gcb failed: ${err}"
