@@ -1,4 +1,5 @@
 def call(Map config = [:]) {
+  echo ${config.ci_webhook}
   def req = new URL("http://samson.zd-mini.com/integrations/generic/${config.ci_webhook}").openConnection();
   def message = "{\"deploy\":{\"branch\":\"${env.GIT_LOCAL_BRANCH}\",\"commit\": {\"sha\":\"${env.GIT_COMMIT}\",\"message\":\"hello!\"}}}"
     req.setRequestMethod("POST")
