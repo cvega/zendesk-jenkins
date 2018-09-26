@@ -2,8 +2,8 @@ def call(Map config = [:]) {
   echo "Hello GCB Library"
   try {
     googleCloudBuild \
-      credentialsId: "${config.credentialId}",
-      source: repo(projectId: "${config.credentialId}",
+      credentialsId: "${config.credentialsId}",
+      source: repo(projectId: "${config.credentialsId}",
                     repoName: "hello-cje",
                          tag: "${config.tag}", 
                    commit: "${env.GIT_COMMIT}"),
