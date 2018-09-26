@@ -6,7 +6,7 @@ def call(Map config = [:]) {
        -H "Content-Type: application/json" \
        -X POST http://samson.zd-mini.com/integrations/generic/ | \
        jq '.deploy_ids[]' """  
-     echo "${ids}"
+     echo ids
   }
   catch (err) {
     throw ${err}
