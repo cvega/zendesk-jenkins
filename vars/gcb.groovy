@@ -3,10 +3,10 @@ def call(Map config = [:]) {
   try {
     googleCloudBuild \
       credentialsId: "${config.credentialId}",
-      source: repo(projectId: "${config.projectId}",
-                    repoName: "${config.repoName}",
+      source: repo(projectId: "${config.credentialId}",
+                    repoName: "hello-cje",
                          tag: "${config.tag}", 
-                      commit: "${config.commitRef}"),
+                   commit: "${env.GIT_COMMIT}"),
       request: file("${config.cloudBuildFile}")
   }
   catch (err) {
