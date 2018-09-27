@@ -41,8 +41,8 @@ def call(Map conf = [:]) {
     
     def respVerify = reqVerify.getResponseCode();
     if(respVerify.equals(200)) {
-    def dataVerify = new JsonSlurperClassic().parseText(reqVerify.getInputStream().getText())
-        println "${dataVerify}"
+      def dataVerify = new JsonSlurperClassic().parseText(reqVerify.getInputStream().getText())
+      println "${dataVerify}"
     }
+  }
 }
-
