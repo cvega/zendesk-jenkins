@@ -1,32 +1,34 @@
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonBuilder
 
 
 def call(Map conf = [:]) {
-  def builder = new JsonBuilder()
-  def json = builder.deploy {
-    branch "${env.BRANCH_NAME}"
-    commit {
-      sha "${env.GIT_COMMIT}"
-      message "${conf.message}"
-    }
+    
+  if (!conf.message) {
+      conf.message = "${env.BUILD_URL}"
   }
   
-  println json.toString()
-  
-  def msg = "{\"deploy\":{\"branch\": \"${env.BRANCH_NAME}\",\"commit\": {\"sha\":\"${env.GIT_COMMIT}\",\"message\":\"hello!\"}}}"  
-  
-  def req = new URL("http://samson.zd-mini.com/integrations/generic/${config.ci_webhook}").openConnection();
+  def msg = """
+    {
+        "deploy": {
+            "branch": ${env.BRANCH_NAME}
+            "commit": {
+                "sha": ${env.GIT_COMMIT},
+                "message": ${conf.message}
+            }
+        }
+    }
+  """
+    
+  def req = new URL("http://samson.zd-mini.com/integrations/generic/${conf.ci_webhook}").openConnection();
   req.setRequestMethod("POST")
   req.setDoOutput(true)
   req.setRequestProperty("Content-Type", "application/json")
-  req.setRequestProperty("Authorization", "Basic ${config.token}")
+  req.setRequestProperty("Authorization", "Basic ${conf.token}")
   req.getOutputStream().write(msg.getBytes("UTF-8"));
   
   def resp = req.getResponseCode();
   if(resp.equals(200)) {
     def data = new JsonSlurperClassic().parseText(req.getInputStream().getText())
-  }
-  
-  
+  }  
 }
+
