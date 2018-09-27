@@ -6,9 +6,9 @@ def call(Map conf = [:]) {
   def builder = new groovy.json.JsonBuilder()
   def json = builder.deploy {
     branch "${env.BRANCH_NAME}"
-    commit (
+    commit(
       sha: "${env.GIT_COMMIT}",
-      message: "${conf.message}"
+      message: "${conf.message}",
     )
   }
   
