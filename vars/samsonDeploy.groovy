@@ -12,6 +12,6 @@ def call(Map config = [:]) {
     def postRC = req.getResponseCode();
     if(postRC.equals(200)) {
       def data = new JsonSlurperClassic().parseText(req.getInputStream().getText())
-      println "${data.deploy_ids[0]}"
+      println "${data.deploy_ids}"
     }
 }
