@@ -31,7 +31,7 @@ def call(Map conf = [:]) {
     def dataDeploy = new JsonSlurperClassic().parseText(reqDeploy.getInputStream().getText())
   }
     
-  def repoName = build.environment.get("GIT_URL").replaceAll('https://github.com/zendesk/', '').replaceAll('.git', '')
+  def repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")
   retry(3) {
     def reqVerify = new URL("http://samson.zd-mini.com/projects/${repoName}/deploys/180.json").openConnection();
     reqVerify.setRequestMethod("GET")
