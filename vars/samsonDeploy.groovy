@@ -8,7 +8,7 @@ def call(Map conf = [:]) {
     branch "${env.BRANCH_NAME}"
     commit {
       sha "${env.GIT_COMMIT}",
-      message "${conf.message}",
+      message "${conf.message}"
     }
   }
   
