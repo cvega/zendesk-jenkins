@@ -1,0 +1,9 @@
+{
+  "deploy": {
+    "build": "",
+    "commit": {
+      "sha": "",
+      "message": ""
+    }
+  }
+}
