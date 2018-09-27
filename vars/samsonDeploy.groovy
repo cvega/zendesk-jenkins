@@ -35,7 +35,7 @@ def call(Map conf = [:]) {
   retry(3) {
     def reqVerify = new URL("http://samson.zd-mini.com/projects/${repoName}/deploys/180.json").openConnection();
     reqVerify.setRequestMethod("GET")
-    reqDeploy.setDoOutput(true)
+    reqVerify.setDoOutput(true)
     reqVerify.setRequestProperty("Content-Type", "application/json")
     reqVerify.setRequestProperty("Authorization", "Bearer ${conf.token}")
     reqVerify.getOutputStream()
