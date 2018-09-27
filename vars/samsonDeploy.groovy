@@ -11,7 +11,7 @@ def call(Map config = [:]) {
     req.getOutputStream().write(message.getBytes("UTF-8"));
     def postRC = req.getResponseCode();
     if(postRC.equals(200)) {
-      def data = new JsonSlurperClassic().parseText(post.getInputStream().getText())
+      def data = new JsonSlurperClassic().parseText(req.getInputStream().getText())
       println "data.deploy_ids[0]"
       println(req.getInputStream().getText());
     }
