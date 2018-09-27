@@ -3,7 +3,7 @@ import groovy.json.JsonBuilder
 
 
 def call(Map conf = [:]) {
-  def builder = new groovy.json.JsonBuilder()
+  def builder = new JsonBuilder()
   def json = builder.deploy {
     branch "${env.BRANCH_NAME}"
     commit {
