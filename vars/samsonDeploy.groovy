@@ -7,7 +7,7 @@ def call(Map conf = [:]) {
   def json = builder.deploy {
     branch "${env.BRANCH_NAME}"
     commit {
-      sha "${env.GIT_COMMIT}",
+      sha "${env.GIT_COMMIT}"
       message "${conf.message}"
     }
   }
