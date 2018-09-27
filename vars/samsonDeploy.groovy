@@ -13,6 +13,6 @@ def call(Map config = [:]) {
     if(postRC.equals(200)) {
       def data = new JsonSlurperClassic().parseText(post.getInputStream().getText())
       println "data.deploy_ids[0]"
-      println(post.getInputStream().getText());
+      println(req.getInputStream().getText());
     }
 }
