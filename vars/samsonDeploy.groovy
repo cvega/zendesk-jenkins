@@ -2,8 +2,8 @@ import zendesk.samson.Deploy
 
 
 def call(Map conf = [:]) {
-    if (!conf.retries) { conf.retries = 3 }
-    if (!conf.seconds) { conf.seconds = 60 }
+    if (!conf.retries) { conf.retries = 5 }
+    if (!conf.seconds) { conf.seconds = 30 }
     
     // init samson and create deploy
     def samson = new Deploy(this, conf.host, conf.token, conf.webhook, conf.msg);
