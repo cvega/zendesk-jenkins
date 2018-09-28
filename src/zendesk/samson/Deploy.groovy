@@ -2,18 +2,24 @@ package zendesk.samson
 
 
 class Deploy implements Serializable {
-    String body="";    
-    String message="";    
-    String url="";   
+    def host
+    def steps
+    def token
+    def webhook
+    def msg
+    def body;    
+    def message;    
+    def url;   
     Integer statusCode;    
     boolean failure = false;
 
 
-    Deploy(steps, token, webhook, host) {
+    Deploy(steps, host, token, webhook, msg) {
         this.host = host
         this.steps = steps
         this.token = token
         this.webhook = webhook
+        this.msg = msg
      }
 
 
@@ -75,15 +81,15 @@ class Deploy implements Serializable {
     }
 
 
-    def create(String branch, String commit, String msg){
-        def json = "{\"deploy\":{\"branch\": \"${branch}\",\"commit\": {\"sha\":\"${commit}\",\"message\":\"${msg}\"}}}"
+    def createDeploy(){
+        def json = "{\"deploy\":{\"branch\": \"${this.steps.env.BRANCH_NAME}\",\"commit\": {\"sha\":\"${this.steps.env.GIT_COMMIT}\",\"message\":\"${this.msg}\"}}}"
         def res = doPostHttpRequestWithJson(json, "http://${this.host}//integrations/generic/${this.webhook}");
-        return res.success;
+        return res;
     }
 
 
-    def get(String id, String repo){
-        def res = doGetHttpRequestWithJson("http://${this.host}/projects/${repo}/deploys/${id}");
-        return res.success;
+    def getDeploy(id){
+        def res = doGetHttpRequestWithJson("http://${this.host}/projects/hello-cje/deploys/${id}.json");
+        return res;
     }
 }
