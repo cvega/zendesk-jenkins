@@ -6,7 +6,7 @@ def call(Map conf = [:]) {
     if (!conf.seconds) { conf.seconds = 30 }
     
     // init samson and create deploy
-    def samson = new Deploy(this, conf.host, conf.token, conf.webhook, conf.msg);
+    def samson = new Deploy(this, conf.host, conf.token, conf.webhook, conf.msg, conf.repo);
     def deploy = samson.createDeploy();
 
     // determine samson deploy status, with retries and sleep timer
