@@ -85,7 +85,7 @@ class Deploy implements Serializable {
         def json = "{\"deploy\":{\"branch\": \"${this.cmd.env.BRANCH_NAME}\",\"commit\": {\"sha\":\"${this.cmd.env.GIT_COMMIT}\",\"message\":\"${this.msg}\"}}}"
         def res = doPostHttpRequestWithJson(json, "http://${this.host}//integrations/generic/${this.webhook}");
         
-        this.cmd.echo "samson deploy ${res.deploy_ids} created"
+        this.cmd.echo "[Samson] deploy ${res.deploy_ids[0]}: created"
         
         return res;
     }
