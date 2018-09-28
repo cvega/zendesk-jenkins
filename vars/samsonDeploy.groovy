@@ -13,7 +13,7 @@ def call(Map conf = [:]) {
     def state, status
     for (int i = 0; i <conf.retries; i++) {
         state = samson.getDeploy("${deploy.deploy_ids[0]}");
-        status = "Deploy ${deploy.deploy_ids[0]}: ${state.deploy.status}"
+        status = "[Samson] deploy ${deploy.deploy_ids[0]}: ${state.deploy.status}"
         
         if ("${state.deploy.status}" == "pending" || 
             "${state.deploy.status}" == "running") {
