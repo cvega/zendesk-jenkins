@@ -9,7 +9,7 @@ def call(Map conf = [:]) {
     def samson = new Deploy(this, conf.host, conf.token, conf.webhook, conf.msg);
     def deploy = samson.createDeploy();
 
-    // determine status of samson deploy, with retries and sleep time
+    // determine samson deploy status, with retries and sleep timer
     def state, status
     for (int i = 0; i <conf.retries; i++) {
         state = samson.getDeploy("${deploy.deploy_ids[0]}");
