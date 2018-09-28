@@ -1,9 +1,0 @@
-{
-  "deploy": {
-    "build": ${env.BRANCH_NAME},
-    "commit": {
-      "sha": ${env.GIT_COMMIT},
-      "message": ${conf.message}
-    }
-  }
-}
