@@ -3,7 +3,7 @@ package zendesk.samson
 
 class Deploy implements Serializable {
     def host
-    def steps
+    def cmd
     def token
     def webhook
     def msg
@@ -14,9 +14,9 @@ class Deploy implements Serializable {
     boolean failure = false;
 
 
-    Deploy(steps, host, token, webhook, msg) {
+    Deploy(cmd, host, token, webhook, msg) {
+        this.cmd = cmd
         this.host = host
-        this.steps = steps
         this.token = token
         this.webhook = webhook
         this.msg = msg
@@ -76,17 +76,19 @@ class Deploy implements Serializable {
             return false
         }    
 
-        def jsonSlurper = new groovy.json.JsonSlurper();
+        def jsonSlurper = new groovy.json.JsonSlurperClassic();
         return jsonSlurper.parseText(body);    
     }
 
 
     def createDeploy(){
-        def json = "{\"deploy\":{\"branch\": \"${this.steps.env.BRANCH_NAME}\",\"commit\": {\"sha\":\"${this.steps.env.GIT_COMMIT}\",\"message\":\"${this.msg}\"}}}"
+        def json = "{\"deploy\":{\"branch\": \"${this.cmd.env.BRANCH_NAME}\",\"commit\": {\"sha\":\"${this.cmd.env.GIT_COMMIT}\",\"message\":\"${this.msg}\"}}}"
         def res = doPostHttpRequestWithJson(json, "http://${this.host}//integrations/generic/${this.webhook}");
+        
+        this.cmd.echo "samson deploy ${res.deploy_ids} created"
+        
         return res;
     }
-
 
     def getDeploy(id){
         def res = doGetHttpRequestWithJson("http://${this.host}/projects/hello-cje/deploys/${id}.json");
