@@ -18,7 +18,7 @@ def call(Map conf = [:]) {
         if ("${state.deploy.status}" == "pending" || 
             "${state.deploy.status}" == "running") {
             echo "${status}"
-            sleep "${conf.seconds}"
+            sleep conf.seconds
         } else if( "${state.deploy.status}" == "errored"){
             echo "${status}"
             return 1
