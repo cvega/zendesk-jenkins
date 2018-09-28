@@ -6,20 +6,22 @@ class Deploy implements Serializable {
     def cmd
     def token
     def webhook
-    def msg
-    def body;    
-    def message;    
-    def url;   
+    def msg = "none"
+    def repo
+    def body    
+    def message    
+    def url   
     Integer statusCode;    
     boolean failure = false;
 
 
-    Deploy(cmd, host, token, webhook, msg) {
+    Deploy(cmd, host, token, webhook, msg, repo) {
         this.cmd = cmd
         this.host = host
         this.token = token
         this.webhook = webhook
         this.msg = msg
+        this.repo = repo
      }
 
 
@@ -91,7 +93,7 @@ class Deploy implements Serializable {
     }
 
     def getDeploy(id){
-        def res = doGetHttpRequestWithJson("http://${this.host}/projects/hello-cje/deploys/${id}.json");
+        def res = doGetHttpRequestWithJson("http://${this.host}/projects/${this.repo}/deploys/${id}.json");
         return res;
     }
 }
