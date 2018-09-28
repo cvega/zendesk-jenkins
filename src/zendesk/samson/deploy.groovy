@@ -1,0 +1,1 @@
+class Samson implements Serializable {}
